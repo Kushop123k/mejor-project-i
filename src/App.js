@@ -1,10 +1,11 @@
 import './App.css';
-import NavBar from './component/NavBar'
+import NavBar from './component/NavBar';
 import Register  from './component/Register';
 import Home from './component/Home';
 import ViewUser from './component/ViewUser';
 import{BrowserRouter,Routes,Route}from 'react-router-dom'
 import SignIn from './component/Sing-in';
+
 function App() {
   return (
     <BrowserRouter>
