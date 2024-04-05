@@ -1,7 +1,17 @@
 import axios from "axios";
 
-const userUrl = 'http://localhost:8090';
-export const AddUser = async(user) => {
-    return await axios.post('$(userUrl}/User', Uaer)
+const userUrl='http://localhost:8090';
 
-}
+export const addUser=async(user)=>{
+    try{
+        return await axios.post(`${userUrl}/user`,user)
+    }catch(error)
+    {
+        console.log('Error while calling adduser Api ',error.message);
+    }
+
+    }
+
+
+    
+   
