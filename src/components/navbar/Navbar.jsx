@@ -30,12 +30,7 @@ const Navbar = () => {
           >Admin pg
                               
           </button>
-          <button className="navButton" onClick={() => {
-                                    navigate("//hotels");
-                                  }}
-          >Hotel
-                              
-          </button>
+          
     
 
           <button className="navButton"
