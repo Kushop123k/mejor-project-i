@@ -1,0 +1,49 @@
+/* ManageBookings.css */
+
+.container {
+    background-color: #f8f9fa; /* Light gray background for better contrast */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+}
+
+.list-group-item {
+    margin-top: 10px;
+    padding: 15px;
+    background-color: #ffffff; /* White background for each list item */
+    border: 1px solid #e0e0e0; /* Light grey border for distinction */
+    border-radius: 5px;
+}
+
+.list-group-item:first-child {
+    margin-top: 0; /* No top margin for the first item */
+}
+
+.list-group-item-action:hover {
+    background-color: #f1f1f1; /* Slight highlight on hover */
+}
+
+.btn {
+    padding: 8px 12px; /* Padding for buttons */
+    font-size: 14px; /* Slightly larger font for readability */
+}
+
+.btn-success {
+    background-color: #28a745; /* Bootstrap green for accept button */
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.btn-danger {
+    background-color: #dc3545; /* Bootstrap red for cancel button */
+    border-color: #dc3545;
+}
+
+.btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+}

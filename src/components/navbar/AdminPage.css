@@ -1,0 +1,67 @@
+.admin-dashboard {
+    font-family: 'Arial', sans-serif;
+    padding: 20px;
+    background-color: #f4f4f9;
+  }
+  
+  .admin-header {
+    color: #333;
+  }
+  
+  .admin-nav {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .admin-nav button {
+    background-color: #0056b3;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin-right: 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  
+  .admin-nav button:hover {
+    background-color: #004494;
+  }
+  
+  .admin-section {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .item-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  
+  .item-list li {
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .item-list li:last-child {
+    border-bottom: none;
+  }
+  
+  .item-list button {
+    float: right;
+    background-color: #ff6347;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    margin-left: 10px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .item-list button:hover {
+    background-color: #e05337;
+  }
+  

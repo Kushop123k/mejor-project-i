@@ -1,0 +1,40 @@
+/* AdminPage.css */
+
+.admin-dashboard {
+    background-color: #0d1b28; /* Soft gray background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+  
+  .admin-header {
+    color: #204051; /* Deep blue color */
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  .admin-nav button {
+    margin-right: 10px; /* Spacing between buttons */
+    color: #ffffff; /* White text color */
+    background-color: #3f72af; /* Blue background */
+    border: none;
+    border-radius: 5px;
+  }
+  
+  .admin-nav button:hover {
+    background-color: #112d4e; /* Darker blue on hover */
+  }
+  
+  .admin-nav button.active, .admin-nav button:focus {
+    background-color: #dbe2ef; /* Light blue for active state */
+    color: #112d4e;
+  }
+  
+  .admin-section {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #ffffff; /* White background for content area */
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
