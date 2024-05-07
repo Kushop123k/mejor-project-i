@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Table, TableHead, TableBody, TableRow, TableCell, Button } from "@mui/material";
-import { getUsers, deleteUser } from "../components/service/Api.js";
+import { getUsers, deleteUser } from "../components/service/Api.js"
 import { Link } from "react-router-dom";
-import styles from '../components/ViewUser.module.css'; // Import the CSS module
+import styles from '../components/service/ViewUser.module.css'; // Import the CSS module
 
 const ViewUser = () => {
     const [users, setUsers] = useState([]);
@@ -32,6 +32,7 @@ const ViewUser = () => {
                         <TableCell className={styles.headerCell}>Email</TableCell>
                         <TableCell className={styles.headerCell}>Phno</TableCell>
                         <TableCell className={styles.headerCell}>Password</TableCell>
+                        <TableCell className={styles.headerCell}>TYPE</TableCell>
                         <TableCell className={styles.headerCell}></TableCell>
                     </TableRow>
                 </TableHead>
@@ -43,6 +44,8 @@ const ViewUser = () => {
                             <TableCell className={styles.rowCell}>{user.email}</TableCell>
                             <TableCell className={styles.rowCell}>{user.phno}</TableCell>
                             <TableCell className={styles.rowCell}>{user.password}</TableCell>
+                            <TableCell className={styles.rowCell}>{user.type}</TableCell>
+                            
                             <TableCell className={styles.buttonGroup}>
                                 <Button className={styles.editButton} component={Link} to={`/edit/${user.id}`}>Edit</Button>
                                 <Button className={styles.deleteButton} onClick={() => deleteUserData(user.id)}>Delete</Button>

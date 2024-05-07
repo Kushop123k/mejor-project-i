@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './Login.css';
 import backgroundImage from './hotel-bg.jpg'; // Path to your image
-
+//import {  useAuth } from '../'
 function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -12,7 +12,8 @@ function Login() {
     };
 
     return (
-        <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+       <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+           
             <form onSubmit={handleLogin} className="login-form">
                 <h2>Login to Your Account</h2>
                 <label htmlFor="email">Email:</label>

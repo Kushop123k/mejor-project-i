@@ -56,21 +56,6 @@ const Header = ({ type }) => {
           type === "list" ? "headerContainer listMode" : "headerContainer"
         }
       >
-        <div className="headerList">
-          <div className="headerListItem active">
-            <FontAwesomeIcon icon={faBed} />
-            <span>Stays</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faHome} />
-            <span>Room</span>
-          </div>
-          <div className="headerListItem">
-            <FontAwesomeIcon icon={faNewspaper} />
-            <span>about</span>
-          </div>
-          
-        </div>
         {type !== "list" && (
           <>
             <h1 className="headerTitle">

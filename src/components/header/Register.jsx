@@ -42,7 +42,7 @@ const Register = () => {
 
     return (
         <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-            <form onSubmit={handleLogin} className="login-form">
+        <form onSubmit={handleLogin} className="login-form">
                 <h2>Create Your Account</h2>
                 <label htmlFor="name">Name:</label>
                 <input
@@ -83,9 +83,10 @@ const Register = () => {
         type="radio"
         id="normal-user"
         value="normal"
-        checked={user.userType === 'normal'}
+        checked={user.type === 'normal'}
         onChange={onValueChange}
-        name="userType"
+        // name="userType"
+        name="type"
     />
     <label htmlFor="normal-user">Normal User</label>
 
@@ -93,14 +94,15 @@ const Register = () => {
         type="radio"
         id="admin-user"
         value="admin"
-        checked={user.userType === 'admin'}
+        checked={user.type === 'admin'}
         onChange={onValueChange}
-        name="userType"
+        // name="userType"
+        name="type"
     />
     <label htmlFor="admin-user">Admin</label>
 </div>
                 <button type="submit">Add User</button>
-            </form>
+                </form>
         </div>
     );
 };
