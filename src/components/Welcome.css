@@ -1,0 +1,44 @@
+.welcome-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #282c34;
+  color: white;
+  font-size: 24px;
+  overflow: hidden; /* Prevents any part of the text from being visible outside the screen */
+}
+
+@keyframes dropIn {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  50% {
+    transform: translateY(30px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.colorful-text {
+  animation: dropIn 2s ease forwards;
+  color: rgb(255, 255, 255); /* Default white, changes via animation */
+  font-weight: bold;
+  font-size: 2rem;
+}
+
+.colorful-text span {
+  animation-delay: calc(0.1s * var(--i));
+}
+
+/* Multiple colors for each span */
+.colorful-text span:nth-child(1) { color: #e57373; }
+.colorful-text span:nth-child(2) { color: #ba68c8; }
+.colorful-text span:nth-child(3) { color: #64b5f6; }
+.colorful-text span:nth-child(4) { color: #4db6ac; }
+.colorful-text span:nth-child(5) { color: #ffd54f; }
+.colorful-text span:nth-child(6) { color: #ff8a65; }
