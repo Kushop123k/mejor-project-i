@@ -27,13 +27,14 @@ export const getUser = async (id) => {
     }
 };
 
-export const editUser = async (user, id) => {
-    try {
-        return await axios.put(`${userUrl}/user/${id}`, user);
-    } catch (error) {
-        console.log("Error while calling editUser API", error.message);
+export const editUser=async(user,id)=>{
+    try{
+    return await axios.put(`${userUrl}/user` ,user)
+    }catch(error){
+        console.log("error while calling update api",error.message);
+
     }
-};
+}
 
 export const deleteUser = async (id) => {
     try {

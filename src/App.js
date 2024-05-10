@@ -11,10 +11,12 @@ import ManageBookings from "./components/ManageBookings";
 import ManageHotels from "./components/ManageHotels";
 import ManageUsers from "./components/ManageUsers";
 import EditUser from "./components/EditUser";
+import Navbar from "./components/navbar/Navbar";
 
 function App() {
   return (
     <BrowserRouter>
+    
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/hotels" element={<List />} />
