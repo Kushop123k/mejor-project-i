@@ -4,9 +4,9 @@ import backgroundImage from '../header/hotel-bg.jpg'; // Reusing the same backgr
 import { addHotel } from "../service/Api"; // Ensure you have this function in your API service
 
 const initialValues = {
-    name: '',
+    hotel_name: '',
     description: '',
-    roomQuantity: '',
+    room: '',
     price: '',
     location: '',
     amenities: [],
@@ -37,9 +37,9 @@ const AddHotel = () => {
         e.preventDefault();
         try {
             const formData = new FormData();
-            formData.append("name", hotel.name);
+            formData.append("name", hotel.hotel_name);
             formData.append("description", hotel.description);
-            formData.append("roomQuantity", hotel.roomQuantity);
+            formData.append("roomQuantity", hotel.room);
             formData.append("price", hotel.price);
             formData.append("location", hotel.location);
             formData.append("amenities", JSON.stringify(hotel.amenities));
@@ -63,8 +63,8 @@ const AddHotel = () => {
                 <label htmlFor="description">Description:</label>
                 <textarea id="description" name="description" onChange={onValueChange} required />
 
-                <label htmlFor="roomQuantity">Number of Rooms:</label>
-                <input type="number" id="roomQuantity" name="roomQuantity" onChange={onValueChange} required />
+                <label htmlFor="room">Number of Rooms:</label>
+                <input type="number" id="room" name="room" onChange={onValueChange} required />
 
                 <label htmlFor="price">Price per Night:</label>
                 <input type="text" id="price" name="price" onChange={onValueChange} required />
