@@ -1,62 +1,49 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import "./searchItem.css";
+import { Navigate } from 'react-router-dom';
 
 const SearchItem = () => {
-  const [itemData, setItemData] = useState(null);
+  const [redirectToHome, setRedirectToHome] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('https://your-backend-url/api/items');  // URL to your API
-        const data = await response.json();
-        setItemData(data);
-      } catch (error) {
-        console.error('Failed to fetch item data:', error);
-      }
-    };
+  const handleAvailabilityClick = () => {
+    setRedirectToHome(true);  // Set the state to true to trigger navigation
+  };
 
-    fetchData();
-  }, []);
-
-  if (!itemData) {
-    return <div>Loading...</div>;
+  if (redirectToHome) {
+    return <Navigate to="/hotel" />; // This will redirect the user to the home page when set
   }
 
   return (
     <div className="searchItem">
       <img
-        src={itemData.imageURL}
-        alt={itemData.name}
+        src="https://cf.bstatic.com/xdata/images/hotel/square600/261707778.webp?k=fa6b6128468ec15e81f7d076b6f2473fa3a80c255582f155cae35f9edbffdd78&o=&s=1"
+        alt=""
         className="siImg"
       />
       <div className="siDesc">
-        <h1 className="siTitle">{itemData.name}</h1>
-        <span className="siDistance">{itemData.distance} from center</span>
-        <span className="siTaxiOp">{itemData.freeTaxi ? 'Free airport taxi' : ''}</span>
+        <h1 className="siTitle">Tower Street Apartments</h1>
+        <span className="siDistance">500m from center</span>
+        <span className="siTaxiOp">Free airport taxi</span>
         <span className="siSubtitle">
-          {itemData.description}
+          Studio Apartment with Air conditioning
         </span>
         <span className="siFeatures">
-          {itemData.features}
+          Entire studio • 1 bathroom • 21m² 1 full bed
         </span>
-        <span className="siCancelOp">{itemData.cancellationPolicy}</span>
+        <span className="siCancelOp">Free cancellation</span>
         <span className="siCancelOpSubtitle">
-          {itemData.cancellationSubtext}
+          You can cancel later, so lock in this great price today!
         </span>
       </div>
       <div className="siDetails">
         <div className="siRating">
-          <span>{itemData.ratingLabel}</span>
-          <button>{itemData.rating}</button>
+          <span>Excellent</span>
+          <button>8.9</button>
         </div>
         <div className="siDetailTexts">
-          <span className="siPrice">{itemData.price}</span>
-          <span className="siTaxOp">{itemData.taxInfo}</span>
-          <div className="siRoomAvailability">
-            <span className="siAvailableRooms">Available Rooms: {itemData.availableRooms}</span>
-           
-          </div>
-          <button className="siCheckButton">Book Now</button>
+          <span className="siPrice">$112</span>
+          <span className="siTaxOp">Includes taxes and fees</span>
+          <button onClick={handleAvailabilityClick} className="siCheckButton">See availability</button>
         </div>
       </div>
     </div>

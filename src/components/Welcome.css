@@ -1,0 +1,32 @@
+.welcome-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: #9fab4e;
+  background-size: cover;
+}
+
+.fade-in {
+  animation: fadeIn 3s;
+  font-size: 2rem;
+  color: rgb(171, 99, 22);
+  text-shadow: 2px 2px 4px #000000;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.options-container {
+  margin-top: 20px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 0 10px;
+  font-size: 1rem;
+  cursor: pointer;
+}
