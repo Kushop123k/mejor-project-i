@@ -10,7 +10,7 @@ const initialValues = {
     price: '',
     location: '',
     amenities: [],
-    image: null
+    
 };
 
 const AddHotel = () => {
@@ -43,7 +43,7 @@ const AddHotel = () => {
             formData.append("price", hotel.price);
             formData.append("location", hotel.location);
             formData.append("amenities", JSON.stringify(hotel.amenities));
-            formData.append("image", hotel.image);
+            
 
             await addHotel(formData); // You need to handle this function on your API service side
             alert("Hotel added successfully!");
@@ -58,7 +58,7 @@ const AddHotel = () => {
             <form onSubmit={handleFormSubmit} className="login-form" encType="multipart/form-data">
                 <h2>Add New Hotel</h2>
                 <label htmlFor="name">Hotel Name:</label>
-                <input type="text" id="name" name="name" onChange={onValueChange} required />
+                <input type="text" id="hotel_name" name="hotel_name" onChange={onValueChange} required />
 
                 <label htmlFor="description">Description:</label>
                 <textarea id="description" name="description" onChange={onValueChange} required />
@@ -72,9 +72,7 @@ const AddHotel = () => {
                 <label htmlFor="location">Location:</label>
                 <input type="text" id="location" name="location" onChange={onValueChange} required />
 
-                <label htmlFor="image">Hotel Image:</label>
-                <input type="file" id="image" name="image" accept="image/*" onChange={onValueChange} required />
-
+               
                 <div className="amenities-container">
                     <label>Amenities:</label>
                     {amenitiesOptions.map((amenity, index) => (
