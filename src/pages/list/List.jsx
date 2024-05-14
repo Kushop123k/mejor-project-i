@@ -1,11 +1,13 @@
 import "./list.css";
+import axios from "axios";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
 import { useLocation } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
+import { getHotels } from "../../components/service/Api";
 
 const List = () => {
   const location = useLocation();
@@ -13,7 +15,11 @@ const List = () => {
   const [date, setDate] = useState(location.state.date);
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
+  const [hotels,setHotels]=useState([])
 
+  useEffect(()=>{
+    getHotels()
+  },[])
   return (
     <div>
       <Navbar />

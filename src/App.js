@@ -13,7 +13,7 @@ import ManageUsers from "./components/ManageUsers";
 import EditUser from "./components/EditUser";
 import Navbar from "./components/navbar/Navbar";
 import Welcome from "./components/Welcome";
-
+import AddToCart from "./components/AddToCart";
 function App() {
   return (
     <BrowserRouter>
@@ -26,6 +26,7 @@ function App() {
 <Route path="/hotel" element={<Hotel/>}/>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/AddToCart" element={<AddToCart />} />
         <Route path="/add-hotel" element={<AddHotel />} />
         <Route path="/admin" element={<AdminPage />} />
         <Route path="/ManageBookings" element={<ManageBookings/>}/>

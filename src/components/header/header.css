@@ -1,5 +1,8 @@
 .header {
-  background-color: hsla(131, 68%, 11%, 0.416);
+  background-image: url(../image.png);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   color: white;
   display: flex;
   justify-content: center;
@@ -7,7 +10,8 @@
 }
 
 .headerContainer {
-  width: 100%;
+  width: 1000%;
+  
   max-width: 1024px;
   margin: 20px 0px 100px 0px;
 }

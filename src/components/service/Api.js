@@ -55,12 +55,26 @@ export const addHotel = async (hotel) => {
 };
 
 // Adding login API function
-export const login = async (email, password) => {
+export const login = async (uemail, upassword ,type) => {
     try {
-        const response = await axios.post(`${userUrl}/login`, { email, password });
+        const response = await axios.post(`${userUrl}/login`, { uemail, upassword ,type});
         return response.data; // Return the data from the response
     } catch (error) {
         console.error('Error while calling login API', error.message);
         throw error; // Rethrowing the error to be handled or displayed by the calling component
     }
 };
+
+
+export const getHotels = async (  ) => {
+    try {
+        return await axios.get(`${userUrl}/hotels`);
+    } catch (error) {
+        console.log('Error while calling getUsers API', error.message);
+    }
+};
+
+
+
+// Your other API functions here...
+

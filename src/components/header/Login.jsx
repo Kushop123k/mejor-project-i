@@ -43,8 +43,8 @@ function Login() {
                 
                 <label htmlFor="email">Email:</label>
                 <input
-                    type="email"
-                    id="email"
+                    type="uemail"
+                    id="uemail"
                     name="email"
                     value={credentials.email}
                     onChange={handleChange}
@@ -53,8 +53,8 @@ function Login() {
                 
                 <label htmlFor="password">Password:</label>
                 <input
-                    type="password"
-                    id="password"
+                    type="upassword"
+                    id="upassword"
                     name="password"
                     value={credentials.password}
                     onChange={handleChange}

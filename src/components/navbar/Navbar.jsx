@@ -23,6 +23,14 @@ const Navbar = () => {
           >AddHotel
                               
           </button>
+          
+          <button className="navButton" onClick={() => {
+                                    navigate("/AddToCart");
+                                  }}
+          >cart
+                              
+          </button>
+        
         
           <button className="navButton" onClick={() => {
                                     navigate("/Admin");
