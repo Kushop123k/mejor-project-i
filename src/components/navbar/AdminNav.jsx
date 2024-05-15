@@ -15,16 +15,17 @@ const Navbar = () => {
       <div className="navContainer">
         <span className="logo">Kushhotel</span>
         <div className="navItems">
+        <button className="navButton" onClick={handleLogout}>
+            Logout
+          </button>
           <button className="navButton" onClick={() => navigate("/AddToCart")}>
             Cart
           </button>
-          <button className="navButton" onClick={() => navigate("/edit/${user.id}")}>
-            Edit Account
+          <button className="navButton" onClick={() => navigate("/Admin")}>
+            Manage Things
           </button>
-         
-          <button className="navButton" onClick={handleLogout}>
-            Logout
-          </button>
+          
+          
         </div>
       </div>
     </div>

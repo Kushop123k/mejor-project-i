@@ -9,7 +9,7 @@ const initialValues = {
     email: '',
     phno: '',
     password: '',
-    userType: 'normal' // Default to 'normal' user type
+    type: 'normal' // Default to 'normal' user type
 };
 
 const Register = () => {
@@ -32,7 +32,7 @@ const Register = () => {
         if (phoneValid) {
             await addUser(user);
             alert("User created successfully!");
-            navigate('/home'); // Navigate to home page after successful registration
+            navigate('/login'); // Navigate to home page after successful registration
         } else {
             alert("Please correct the phone number."); // Alert if phone number is invalid
         }
@@ -86,9 +86,9 @@ const Register = () => {
                         type="radio"
                         id="normal-user"
                         value="normal"
-                        checked={user.userType === 'normal'}
+                        checked={user.type === 'normal'}
                         onChange={onValueChange}
-                        name="userType"
+                        name="type"
                     />
                     <label htmlFor="normal-user">Normal User</label>
 
@@ -96,9 +96,9 @@ const Register = () => {
                         type="radio"
                         id="admin-user"
                         value="admin"
-                        checked={user.userType === 'admin'}
+                        checked={user.type === 'admin'}
                         onChange={onValueChange}
-                        name="userType"
+                        name="type"
                     />
                     <label htmlFor="admin-user">Admin</label>
                 </div>

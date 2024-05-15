@@ -2,12 +2,12 @@ import "./list.css";
 import axios from "axios";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
-import { getHotels } from "../../components/service/Api";
+import { getAllHotels, getHotels } from "../../components/service/Api";
 
 const List = () => {
   const location = useLocation();
@@ -16,9 +16,16 @@ const List = () => {
   const [openDate, setOpenDate] = useState(false);
   const [options, setOptions] = useState(location.state.options);
   const [hotels,setHotels]=useState([])
-
+  const [searchParams]=useSearchParams()
   async function fetchHotels(){
-    const{data}=await getHotels()
+    let result
+    if(destination.length<1){
+      result=await getAllHotels()
+    }
+    else{
+      result=await getHotels(destination)
+    }
+    const {data}=result
     console.log(data)
     setHotels(data)
   }

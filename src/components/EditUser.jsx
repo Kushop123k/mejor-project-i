@@ -44,7 +44,7 @@ const EditUser = () => {
 
     const updateUserDetails = async () => {
         await editUser(user, id);
-        navigate('/Admin'); // Navigate to view page or your desired route
+        navigate('/'); // Navigate to view page or your desired route
     };
 
     return (

@@ -19,12 +19,15 @@ function Login() {
         setError('');
 
         try {
-            const data = await login(credentials);
-            console.log('Login success:', data);
-            if (credentials.userType === 'admin') {
-                navigate('/admin-dashboard');
+            const response = await login(credentials.email, credentials.password, credentials.userType);
+            if (response === "Success") {
+                if (credentials.userType === 'admin') {
+                    navigate('/AdminHome');
+                } else {
+                    navigate('/home');
+                }
             } else {
-                navigate('/home');
+                setError('Invalid credentials. Please try again.');
             }
         } catch (err) {
             if (err.response) {
@@ -43,8 +46,8 @@ function Login() {
                 
                 <label htmlFor="email">Email:</label>
                 <input
-                    type="uemail"
-                    id="uemail"
+                    type="email"
+                    id="email"
                     name="email"
                     value={credentials.email}
                     onChange={handleChange}
@@ -53,8 +56,8 @@ function Login() {
                 
                 <label htmlFor="password">Password:</label>
                 <input
-                    type="upassword"
-                    id="upassword"
+                    type="password"
+                    id="password"
                     name="password"
                     value={credentials.password}
                     onChange={handleChange}
