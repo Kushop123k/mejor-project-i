@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './Login.css';
 import backgroundImage from './hotel-bg.jpg'; // Path to your image
 import { addUser } from "../service/Api";
+import { useNavigate } from 'react-router-dom';
 
 const initialValues = {
     name: '',
@@ -14,22 +15,24 @@ const initialValues = {
 const Register = () => {
     const [user, setUser] = useState(initialValues);
     const [phoneValid, setPhoneValid] = useState(true);
+    const navigate = useNavigate(); // Hook for navigation
 
     const onValueChange = (e) => {
         const { name, value } = e.target;
         if (name === "phno") {
             const cleaned = value.replace(/\D/g, ''); // Remove non-digits
-            setUser({...user, phno: cleaned});
+            setUser({ ...user, phno: cleaned });
             setPhoneValid(cleaned.length === 10); // Validate phone number
         } else {
-            setUser({...user, [name]: value});
+            setUser({ ...user, [name]: value });
         }
     };
 
     const addUserDetails = async () => {
         if (phoneValid) {
             await addUser(user);
-            alert("User created successfully!"); // Show alert when user is successfully created
+            alert("User created successfully!");
+            navigate('/home'); // Navigate to home page after successful registration
         } else {
             alert("Please correct the phone number."); // Alert if phone number is invalid
         }
@@ -42,7 +45,7 @@ const Register = () => {
 
     return (
         <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-        <form onSubmit={handleLogin} className="login-form">
+            <form onSubmit={handleLogin} className="login-form">
                 <h2>Create Your Account</h2>
                 <label htmlFor="name">Name:</label>
                 <input
@@ -78,31 +81,29 @@ const Register = () => {
                     name="password"
                     required
                 />
-               <div className="radio-group">
-    <input
-        type="radio"
-        id="normal-user"
-        value="normal"
-        checked={user.type === 'normal'}
-        onChange={onValueChange}
-        // name="userType"
-        name="type"
-    />
-    <label htmlFor="normal-user">Normal User</label>
+                <div className="radio-group">
+                    <input
+                        type="radio"
+                        id="normal-user"
+                        value="normal"
+                        checked={user.userType === 'normal'}
+                        onChange={onValueChange}
+                        name="userType"
+                    />
+                    <label htmlFor="normal-user">Normal User</label>
 
-    <input
-        type="radio"
-        id="admin-user"
-        value="admin"
-        checked={user.type === 'admin'}
-        onChange={onValueChange}
-        // name="userType"
-        name="type"
-    />
-    <label htmlFor="admin-user">Admin</label>
-</div>
+                    <input
+                        type="radio"
+                        id="admin-user"
+                        value="admin"
+                        checked={user.userType === 'admin'}
+                        onChange={onValueChange}
+                        name="userType"
+                    />
+                    <label htmlFor="admin-user">Admin</label>
+                </div>
                 <button type="submit">Add User</button>
-                </form>
+            </form>
         </div>
     );
 };

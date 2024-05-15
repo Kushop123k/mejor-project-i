@@ -8,7 +8,9 @@
   background-size: cover;
 }
 
+
 .fade-in {
+  transition-duration: 3s;
   animation: fadeIn 3s;
   font-size: 2rem;
   color: rgb(171, 99, 22);

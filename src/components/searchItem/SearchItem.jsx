@@ -35,8 +35,7 @@ const SearchItem = (props) => {
         <span className="siDistance">500m from center</span>
         <span className="siTaxiOp">Free airport taxi</span>
         <span className="siSubtitle">
-          Studio Apartment with Air conditioning
-        </span>
+          {props.description}</span>
         <span className="siFeatures">
           Entire studio • 1 bathroom • 21m² 1 full bed
         </span>

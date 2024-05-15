@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../header/Login.css'; // Reusing the existing CSS
+import '../header/Add.css'; // Reusing the existing CSS
 import backgroundImage from '../header/hotel-bg.jpg'; // Reusing the same background image
 import { addHotel } from "../service/Api"; // Ensure you have this function in your API service
 
