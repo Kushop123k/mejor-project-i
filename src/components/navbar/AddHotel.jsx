@@ -10,7 +10,6 @@ const initialValues = {
     price: '',
     location: '',
     amenities: [],
-    
 };
 
 const AddHotel = () => {
@@ -36,19 +35,18 @@ const AddHotel = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-           const body={
-                "hotelName": hotel.hotel_name,
-                "location": hotel.location,
-                "price": hotel.price,
-                "room": hotel.room,
-                "description": hotel.description,
-                "isWifienabled": hotel.amenities.some((item)=>item==="Wifi"),
-                "isPoll" : hotel.amenities.some((item)=>item==="Pool"),
-                "isParking": hotel.amenities.some((item)=>item==="Parking"),
-                "isSpaEnabled": hotel.amenities.some((item)=>item==="Spa"),
-                "isGymEnabled": hotel.amenities.some((item)=>item==="Gym")
-            }
-            
+            const body = {
+                hotelName: hotel.hotel_name,
+                location: hotel.location,
+                price: hotel.price,
+                room: hotel.room,
+                description: hotel.description,
+                isWifiEnabled: hotel.amenities.includes("WiFi"),
+                isPool: hotel.amenities.includes("Pool"),
+                isParking: hotel.amenities.includes("Parking"),
+                isSpaEnabled: hotel.amenities.includes("Spa"),
+                isGymEnabled: hotel.amenities.includes("Gym")
+            };
 
             await addHotel(body); // You need to handle this function on your API service side
             alert("Hotel added successfully!");
@@ -62,7 +60,7 @@ const AddHotel = () => {
         <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
             <form onSubmit={handleFormSubmit} className="login-form" encType="multipart/form-data">
                 <h2>Add New Hotel</h2>
-                <label htmlFor="name">Hotel Name:</label>
+                <label htmlFor="hotel_name">Hotel Name:</label>
                 <input type="text" id="hotel_name" name="hotel_name" onChange={onValueChange} required />
 
                 <label htmlFor="description">Description:</label>
@@ -77,7 +75,6 @@ const AddHotel = () => {
                 <label htmlFor="location">Location:</label>
                 <input type="text" id="location" name="location" onChange={onValueChange} required />
 
-               
                 <div className="amenities-container">
                     <label>Amenities:</label>
                     {amenitiesOptions.map((amenity, index) => (

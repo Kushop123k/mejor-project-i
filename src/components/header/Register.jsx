@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import '../header/Register.css';
+import './Login.css';
 import backgroundImage from './hotel-bg.jpg'; // Path to your image
 import { addUser } from "../service/Api";
-import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const initialValues = {
     name: '',
@@ -15,7 +14,6 @@ const initialValues = {
 const Register = () => {
     const [user, setUser] = useState(initialValues);
     const [phoneValid, setPhoneValid] = useState(true);
-    const navigate = useNavigate(); // useNavigate hook
 
     const onValueChange = (e) => {
         const { name, value } = e.target;
@@ -32,7 +30,6 @@ const Register = () => {
         if (phoneValid) {
             await addUser(user);
             alert("User created successfully!"); // Show alert when user is successfully created
-            navigate('/home'); // Redirect to home page after successful registration
         } else {
             alert("Please correct the phone number."); // Alert if phone number is invalid
         }
@@ -45,7 +42,7 @@ const Register = () => {
 
     return (
         <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
-            <form onSubmit={handleLogin} className="login-form">
+        <form onSubmit={handleLogin} className="login-form">
                 <h2>Create Your Account</h2>
                 <label htmlFor="name">Name:</label>
                 <input
@@ -86,9 +83,10 @@ const Register = () => {
         type="radio"
         id="normal-user"
         value="normal"
-        checked={user.userType === 'normal'}
+        checked={user.type === 'normal'}
         onChange={onValueChange}
-        name="userType"
+        // name="userType"
+        name="type"
     />
     <label htmlFor="normal-user">Normal User</label>
 
@@ -96,14 +94,15 @@ const Register = () => {
         type="radio"
         id="admin-user"
         value="admin"
-        checked={user.userType === 'admin'}
+        checked={user.type === 'admin'}
         onChange={onValueChange}
-        name="userType"
+        // name="userType"
+        name="type"
     />
     <label htmlFor="admin-user">Admin</label>
 </div>
                 <button type="submit">Add User</button>
-            </form>
+                </form>
         </div>
     );
 };

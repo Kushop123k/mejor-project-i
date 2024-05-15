@@ -1,5 +1,4 @@
 import axios from "axios";
-import Hotel from "../../pages/hotel/Hotel";
 
 const userUrl = 'http://localhost:8090';
 
@@ -44,28 +43,19 @@ export const deleteUser = async (id) => {
     }
 };
 
-// export const addHotel = async (hotel) => {
-//     const config = {
-//         headers: { 'Content-Type': 'multipart/form-data' }
-//     };
-//     try {
-//         return await axios.post(`${userUrl}/hotel`, hotel, config);
-//     } catch (error) {
-//         console.log('Error while calling addHotel API', error.message);
-//     }
-// };
 export const addHotel = async (hotel) => {
     try {
-        console.log(hotel)
-        return await axios.post(`${userUrl}/addhotel`,{
-            body:hotel
+        console.log(hotel);
+        return await axios.post(`${userUrl}/addhotel`, hotel, {
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
     } catch (error) {
-        console.log('Error while calling addUser API', error.message);
+        console.log('Error while calling addHotel API', error.message);
     }
 };
 
-// Adding login API function
 export const login = async (email, password) => {
     try {
         const response = await axios.post(`${userUrl}/login`, { email, password });
@@ -75,10 +65,11 @@ export const login = async (email, password) => {
         throw error; // Rethrowing the error to be handled or displayed by the calling component
     }
 };
+
 export const getHotels = async () => {
     try {
         return await axios.get(`${userUrl}/gethotels`);
     } catch (error) {
-        console.log('Error while calling getUsers API', error.message);
+        console.log('Error while calling getHotels API', error.message);
     }
 };
