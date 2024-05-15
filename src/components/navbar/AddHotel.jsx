@@ -36,16 +36,21 @@ const AddHotel = () => {
     const handleFormSubmit = async (e) => {
         e.preventDefault();
         try {
-            const formData = new FormData();
-            formData.append("name", hotel.hotel_name);
-            formData.append("description", hotel.description);
-            formData.append("roomQuantity", hotel.room);
-            formData.append("price", hotel.price);
-            formData.append("location", hotel.location);
-            formData.append("amenities", JSON.stringify(hotel.amenities));
+           const body={
+                "hotelName": hotel.hotel_name,
+                "location": hotel.location,
+                "price": hotel.price,
+                "room": hotel.room,
+                "description": hotel.description,
+                "isWifienabled": hotel.amenities.some((item)=>item==="Wifi"),
+                "isPoll" : hotel.amenities.some((item)=>item==="Pool"),
+                "isParking": hotel.amenities.some((item)=>item==="Parking"),
+                "isSpaEnabled": hotel.amenities.some((item)=>item==="Spa"),
+                "isGymEnabled": hotel.amenities.some((item)=>item==="Gym")
+            }
             
 
-            await addHotel(formData); // You need to handle this function on your API service side
+            await addHotel(body); // You need to handle this function on your API service side
             alert("Hotel added successfully!");
         } catch (error) {
             console.error("Failed to add hotel:", error);

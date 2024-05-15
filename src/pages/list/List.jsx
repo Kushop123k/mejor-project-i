@@ -17,8 +17,13 @@ const List = () => {
   const [options, setOptions] = useState(location.state.options);
   const [hotels,setHotels]=useState([])
 
+  async function fetchHotels(){
+    const{data}=await getHotels()
+    console.log(data)
+    setHotels(data)
+  }
   useEffect(()=>{
-    getHotels()
+    fetchHotels()
   },[])
   return (
     <div>
@@ -49,15 +54,12 @@ const List = () => {
             <button>Search</button>
           </div>
           <div className="listResult">
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
-            <SearchItem />
+           {
+            hotels.map((hotel,index)=>(
+              <SearchItem  key={hotel.id} {...hotel}/>
+            ))
+           }
+
           </div>
         </div>
       </div>

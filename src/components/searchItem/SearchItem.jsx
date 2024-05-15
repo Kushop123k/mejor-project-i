@@ -11,7 +11,7 @@ const images=[
 "https://imageio.forbes.com/specials-images/imageserve/5cdb058a5218470008b0b00f/Nobu-Ryokan-Malibu/0x0.jpg?format=jpg&height=1009&width=2000",
 "https://cf.bstatic.com/xdata/images/hotel/square600/261707778.webp?k=fa6b6128468ec15e81f7d076b6f2473fa3a80c255582f155cae35f9edbffdd78&o=&s=1"
 ]
-const SearchItem = () => {
+const SearchItem = (props) => {
   const [redirectToHome, setRedirectToHome] = useState(false);
 
   const handleAvailabilityClick = () => {
@@ -31,7 +31,7 @@ const SearchItem = () => {
         
       />
       <div className="siDesc">
-        <h1 className="siTitle">Tower Street Apartments</h1>
+        <h1 className="siTitle">{props.hotelName}</h1>
         <span className="siDistance">500m from center</span>
         <span className="siTaxiOp">Free airport taxi</span>
         <span className="siSubtitle">
@@ -51,7 +51,7 @@ const SearchItem = () => {
           <button>8.9</button>
         </div>
         <div className="siDetailTexts">
-          <span className="siPrice">$112</span>
+          <span className="siPrice">{props.price}</span>
           <span className="siTaxOp">Includes taxes and fees</span>
           <button onClick={handleAvailabilityClick} className="siCheckButton">See availability</button>
         </div>
