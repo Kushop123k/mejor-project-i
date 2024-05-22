@@ -24,6 +24,10 @@ const Navbar = () => {
           <button className="navButton" onClick={() => navigate("/Admin")}>
             Manage Things
           </button>
+          <button className="navButton" onClick={() => navigate("/payment")}>
+            Payment
+          </button>
+         
           
           
         </div>
