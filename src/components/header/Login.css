@@ -17,6 +17,15 @@
   transition: transform 0.3s ease-in-out;
 }
 
+.error-box {
+  color: white;
+  background-color: red;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
 /* Additional CSS remains unchanged */
 .login-container {
   display: flex;

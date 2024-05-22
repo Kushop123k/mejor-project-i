@@ -39,10 +39,10 @@ function Login() {
     };
 
     return (
-        <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <div className="login-container" style={{ backgroundImage: `url(${backgroundImage}) `}}>
             <form onSubmit={handleLogin} className="login-form">
                 <h2>Login to Your Account</h2>
-                {error && <p className="error">{error}</p>}
+                {error && <div className="error-box">{error}</div>}
                 
                 <label htmlFor="email">Email:</label>
                 <input
@@ -63,7 +63,7 @@ function Login() {
                     onChange={handleChange}
                     required
                 />
-
+                    <br /><br />
                 <div className="radio-group">
                     <input
                         type="radio"
@@ -73,6 +73,7 @@ function Login() {
                         checked={credentials.userType === 'normal'}
                         onChange={handleChange}
                     />
+                    
                     <label htmlFor="normal-user">Normal User</label>
                     
                     <input

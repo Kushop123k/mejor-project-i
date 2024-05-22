@@ -3,6 +3,8 @@ import './Login.css';
 import backgroundImage from './hotel-bg.jpg'; // Path to your image
 import { addUser } from "../service/Api";
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const initialValues = {
     name: '',
@@ -15,6 +17,7 @@ const initialValues = {
 const Register = () => {
     const [user, setUser] = useState(initialValues);
     const [phoneValid, setPhoneValid] = useState(true);
+    const [error, setError] = useState('');
     const navigate = useNavigate(); // Hook for navigation
 
     const onValueChange = (e) => {
@@ -30,23 +33,31 @@ const Register = () => {
 
     const addUserDetails = async () => {
         if (phoneValid) {
-            await addUser(user);
-            alert("User created successfully!");
-            navigate('/login'); // Navigate to home page after successful registration
+            try {
+                await addUser(user);
+                toast.success("User created successfully!");
+                setTimeout(() => {
+                    navigate('/login'); // Navigate to home page after successful registration
+                }, 2000); // Delay for 2 seconds before navigating
+            } catch (error) {
+                setError("Failed to create user. Please try again.");
+            }
         } else {
-            alert("Please correct the phone number."); // Alert if phone number is invalid
+            setError("Please correct the phone number.");
         }
     };
 
     const handleLogin = (e) => {
         e.preventDefault();
+        setError('');
         addUserDetails();
     };
 
     return (
-        <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})` }}>
+        <div className="login-container" style={{ backgroundImage: `url(${backgroundImage}) `}}>
             <form onSubmit={handleLogin} className="login-form">
                 <h2>Create Your Account</h2>
+                {error && <div className="error-box">{error}</div>}
                 <label htmlFor="name">Name:</label>
                 <input
                     type="text"
@@ -55,6 +66,7 @@ const Register = () => {
                     name="name"
                     required
                 />
+                <br /><br />
                 <label htmlFor="phno">Phone No:</label>
                 <input
                     type="text"
@@ -64,7 +76,8 @@ const Register = () => {
                     name="phno"
                     required
                 />
-                {!phoneValid && <div style={{ color: 'red' }}>Phone number must be exactly 10 digits.</div>}
+                <br /><br />
+                {!phoneValid && <div className="error-box">Phone number must be exactly 10 digits.</div>}
                 <label htmlFor="email">Email:</label>
                 <input
                     type="email"
@@ -81,6 +94,7 @@ const Register = () => {
                     name="password"
                     required
                 />
+                <br /><br />
                 <div className="radio-group">
                     <input
                         type="radio"
@@ -104,6 +118,7 @@ const Register = () => {
                 </div>
                 <button type="submit">Add User</button>
             </form>
+            <ToastContainer />
         </div>
     );
 };
