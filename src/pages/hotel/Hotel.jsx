@@ -11,6 +11,7 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Hotel = () => {
   const [slideNumber, setSlideNumber] = useState(0);
@@ -53,7 +54,6 @@ const Hotel = () => {
 
     setSlideNumber(newSlideNumber)
   };
-
   return (
     <div>
       <Navbar />
@@ -132,7 +132,7 @@ const Hotel = () => {
               <h2>
                 <b>$945</b> (9 nights)
               </h2>
-              <button>Reserve or Book Now!</button>
+              <Link to="/payment" state={{prize:945*100,hotelId:"1234"}}>Reserve or Book Now!</Link>
             </div>
           </div>
         </div>

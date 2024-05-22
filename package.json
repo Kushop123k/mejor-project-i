@@ -24,6 +24,7 @@
     "react-bootstrap": "^2.10.2",
     "react-date-range": "^1.4.0",
     "react-dom": "^18.0.0",
+    "react-razorpay": "^2.0.1",
     "react-router-dom": "^6.23.1",
     "react-scripts": "5.0.1",
     "styled": "^1.0.0",

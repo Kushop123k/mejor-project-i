@@ -15,6 +15,7 @@ import Navbar from "./components/navbar/Navbar";
 import Welcome from "./components/Welcome";
 import AddToCart from "./components/AddToCart";
 import AdminHome from "../src/pages/home/AdminHome"
+import Payment from "../src/pages/Payment"
 function App() {
   return (
     <BrowserRouter>
@@ -34,6 +35,7 @@ function App() {
         <Route path="/ManageBookings" element={<ManageBookings/>}/>
         <Route path="/ManageHotels" element={<ManageHotels/>}/>
         <Route path="/ManageUsers" element={<ManageUsers/>}/>
+        <Route path="/payment" element={<Payment/>}/>
         <Route path="/edit/:id" element={<EditUser/>}/>
       </Routes>
     </BrowserRouter>
