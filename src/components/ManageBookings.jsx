@@ -1,27 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { Table, TableHead, TableBody, TableRow, TableCell, Button } from "@mui/material";
-import { getHotels, cancelBooking, getBookings } from "../components/service/Api.js";
+import { getBookings, cancelBooking } from "../components/service/Api.js";
 import styles from '../components/ViewHotel.module.css'; // Import the CSS module
 
 const ViewHotel = () => {
-    const [bookings, setBookings] = useState([])
+    const [bookings, setBookings] = useState([]);
 
-  
     useEffect(() => {
         getBookingDetails();
     }, []);
 
     const getBookingDetails = async () => {
-        let response = await getBookings();
-        const username=localStorage.getItem("userName")
-        console.log(response);
-        setBookings(response.data);
+        try {
+            let response = await getBookings();
+            const username = localStorage.getItem("userName");
+            console.log(response);
+            setBookings(response.data);
+        } catch (error) {
+            console.error("Error fetching bookings:", error);
+        }
     };
 
-    const cancelBookingData = async (body) => {
-        console.log(body)
-        await cancelBooking(body);
-        getBookingDetails();
+    const cancelBookingData = async (bookingId) => {
+        try {
+            console.log("Cancelling booking:", bookingId);
+            await cancelBooking(bookingId);
+            getBookingDetails(); // Refresh the booking list
+        } catch (error) {
+            console.error("Error cancelling booking:", error);
+        }
     };
 
     return (
@@ -38,15 +45,15 @@ const ViewHotel = () => {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {bookings.map(booking => (
+                    {bookings.map((booking, index) => (
                         <TableRow key={booking.id}>
-                            <TableCell className={styles.rowCell}>{booking.id}</TableCell>
+                            <TableCell className={styles.rowCell}>{index + 1}</TableCell>
                             <TableCell className={styles.rowCell}>{booking.hotelId}</TableCell>
                             <TableCell className={styles.rowCell}>{booking.hotelName}</TableCell>
                             <TableCell className={styles.rowCell}>{booking.userName}</TableCell>
                             <TableCell className={styles.rowCell}>{booking.rooms}</TableCell>
                             <TableCell className={styles.buttonGroup}>
-                                <Button className={styles.cancelButton} onClick={() => cancelBookingData(booking)}>Cancel</Button>
+                                <Button className={styles.cancelButton} onClick={() => cancelBookingData(booking.id)}>Cancel</Button>
                             </TableCell>
                         </TableRow>
                     ))}
@@ -55,4 +62,5 @@ const ViewHotel = () => {
         </div>
     );
 };
+
 export default ViewHotel;

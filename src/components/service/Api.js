@@ -27,12 +27,11 @@ export const getUser = async (id) => {
     }
 };
 
-export const editUser=async(user,id)=>{
-    try{
-    return await axios.put(`${userUrl}/user` ,user)
-    }catch(error){
-        console.log("error while calling update api",error.message);
-
+export const editUser = async (user, id) => {
+    try {
+        return await axios.put(`${userUrl}/user`, user);
+    } catch (error) {
+        console.log("error while calling update api", error.message);
     }
 }
 
@@ -59,12 +58,13 @@ export const addHotel = async (hotel) => {
 
 export const login = async (email, password, userType) => {
     try {
-      const response = await axios.get(`${userUrl}/login?email=${email}&password=${password}&userType=${userType}`, { email, password, userType });
-       return response.data;
+        const response = await axios.get(`${userUrl}/login?email=${email}&password=${password}&userType=${userType}`, { email, password, userType });
+        return response.data;
     } catch (error) {
-      throw new Error(error.response.data.message || 'Login failed. Please try again.');
+        throw new Error(error.response.data.message || 'Login failed. Please try again.');
     }
-  };
+};
+
 export const getHotels = async (location) => {
     try {
         return await axios.get(`${userUrl}/hotels/${location}`);
@@ -72,6 +72,7 @@ export const getHotels = async (location) => {
         console.log('Error while calling getHotels API', error.message);
     }
 };
+
 export const getAllHotels = async () => {
     try {
         return await axios.get(`${userUrl}/gethotels`);
@@ -81,29 +82,37 @@ export const getAllHotels = async () => {
 };
 
 export const getBookings = async (token) => {
-    return await axios.get(`${userUrl}/fetchbooking`, {
-        headers: {
-            Authorization: `Bearer ${token}`
-        }
-    });
+    try {
+        return await axios.get(`${userUrl}/fetchbooking`, {
+            headers: {
+                Authorization: `Bearer ${token}`
+            }
+        });
+    } catch (error) {
+        console.log('Error while calling getBookings API', error.message);
+    }
 };
 
-export const cancelBooking = async (body) => {
+export const cancelBooking = async (bookingId) => {
     try {
-        
-        return await axios.delete(`${userUrl}/deletebooking`,body);
+        return await axios.delete(`${userUrl}/deletebooking/${bookingId}`);
     } catch (error) {
-     console.log(error)   
+        console.log('Error while calling cancelBooking API', error.message);
     }
 };
+
 export const getHotelById = async (id) => {
-    return await axios.get(`${userUrl}/hotel/${id}`);
+    try {
+        return await axios.get(`${userUrl}/hotel/${id}`);
+    } catch (error) {
+        console.log('Error while calling getHotelById API', error.message);
+    }
 };
+
 export const addbooking = async (body) => {
     try {
-        
-        return await axios.post(`${userUrl}/addbooking`,body);
+        return await axios.post(`${userUrl}/addbooking`, body);
     } catch (error) {
-        console.log(error)   
+        console.log('Error while calling addbooking API', error.message);
     }
-    };
+};

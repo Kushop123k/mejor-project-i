@@ -19,8 +19,8 @@ app.get("/",(req, res) =>{
 app.post("/order", async (req, res) =>{
     try {
         const razorpay = new Razorpay({
-            key_id: process.env.RAZORPAY_KEY_ID,
-            key_secret: process.env.RAZORPAY_SECRET
+            key_id: process.env.KEY_ID,
+key_secret: process.env.KEY_SECRET    
         });
         
         if(!req.body){
