@@ -6,7 +6,7 @@ const Navbar = () => {
 
   const handleLogout = () => {
     // Clear user token or any auth state here
-    localStorage.removeItem("userToken");  // Example of clearing user token
+    localStorage.removeItem("userId");  // Example of clearing user token
     navigate("/");  // Redirect to the welcome page
   };
 
@@ -15,10 +15,10 @@ const Navbar = () => {
       <div className="navContainer">
         <span className="logo">Kushhotel</span>
         <div className="navItems">
-          <button className="navButton" onClick={() => navigate("/AddToCart")}>
-            Cart
+          <button className="navButton" onClick={() => navigate("/ViewBooking")}>
+            View Booking
           </button>
-          <button className="navButton" onClick={() => navigate("/edit/${user.id}")}>
+          <button className="navButton" onClick={() => navigate(`/edit/${localStorage.getItem("userId")}`)}>
             Edit Account
           </button>
          

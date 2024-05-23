@@ -10,13 +10,23 @@ import {
   faCircleXmark,
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, Navigate, useParams } from "react-router-dom";
+import { getHotelById } from "../../components/service/Api";
 
-const Hotel = () => {
+const Hotel = ({user}) => {
   const [slideNumber, setSlideNumber] = useState(0);
+  const [rooms,setRooms]=useState(1)
   const [open, setOpen] = useState(false);
-
+  const params=useParams()
+  const [hotel,setHotel]=useState({})
+  async function fetchHotel(){
+    const {data}=await getHotelById(params.id)
+    setHotel(data)
+  }
+  useEffect(()=>{
+    fetchHotel()
+  },[])
   const photos = [
     {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1",
@@ -82,8 +92,8 @@ const Hotel = () => {
           </div>
         )}
         <div className="hotelWrapper">
-          <button className="bookNow">Reserve or Book Now!</button>
-          <h1 className="hotelTitle">Tower Street Apartments</h1>
+          <Link to="/home" className="bookNow">go home</Link>
+          <h1 className="hotelTitle">{hotel?.hotelName}</h1>
           <div className="hotelAddress">
             <FontAwesomeIcon icon={faLocationDot} />
             <span>Elton St 125 New york</span>
@@ -92,7 +102,7 @@ const Hotel = () => {
             Excellent location – 500m from center
           </span>
           <span className="hotelPriceHighlight">
-            Book a stay over $114 at this property and get a free airport taxi
+            Book a stay over 114 at this property and get a free airport taxi
           </span>
           <div className="hotelImages">
             {photos.map((photo, i) => (
@@ -124,15 +134,19 @@ const Hotel = () => {
               </p>
             </div>
             <div className="hotelDetailsPrice">
-              <h1>Perfect for a 9-night stay!</h1>
+              <h1>Perfect for a stay!</h1>
               <span>
-                Located in the real heart of Krakow, this property has an
-                excellent location score of 9.8!
+                Located in the real heart of {hotel?.location}, this property has an
+                excellent location score of {(7+Math.random()*3).toFixed(1)}!
               </span>
               <h2>
-                <b>$945</b> (9 nights)
+                <b>₹{hotel?.price}</b> (Per night)
               </h2>
-              <Link to="/payment" state={{prize:945*100,hotelId:"1234"}}>Reserve or Book Now!</Link>
+              <h4>{hotel?.room} are available</h4>
+                <label htmlFor="rooms">
+                <input type="number" id="rooms" max={hotel.room} value={rooms} onChange={(e)=> {if(e.target.value>hotel?.room) return; setRooms(e.target.value)}} />
+                </label>
+              <Link to="/payment" state={{prize:hotel?.price*100,hotelId:hotel?.id,userId:user,rooms,hotelName:hotel.hotelName}}> Book Now at this prize!</Link>
             </div>
           </div>
         </div>

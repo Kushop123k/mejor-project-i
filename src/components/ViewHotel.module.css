@@ -1,0 +1,27 @@
+/* ViewHotel.module.css */
+.tableContainer {
+    margin: 20px;
+}
+
+.headerCell {
+    font-weight: bold;
+    background-color: #f5f5f5;
+}
+
+.rowCell {
+    padding: 10px;
+}
+
+.buttonGroup {
+    display: flex;
+    justify-content: space-around;
+}
+
+.cancelButton {
+    color: white;
+    background-color: red;
+}
+
+.cancelButton:hover {
+    background-color: darkred;
+}

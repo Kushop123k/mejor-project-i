@@ -27,7 +27,6 @@ app.post("/order", async (req, res) =>{
             return res.status(400).send("BAD REQUEST");
         }
         const options = req.body;
-        console.log(options)
         const order = await razorpay.orders.create(options);
 
         if(!order){
@@ -36,8 +35,8 @@ app.post("/order", async (req, res) =>{
         res.json(order);
 
     } catch (error) {
-        console.log(error);
-        res.status(500000).send(error)
+        console.log(error); 
+        res.status(500).send(error)
     }
 })
 
@@ -47,12 +46,17 @@ app.post("/validate", async (req, res)=>{
 
     const sha = crypto.createHmac("sha256", process.env.RAZORPAY_SECRET);
 
-    sha.update(`${razorpay_order_id}|${razorpay_payment_id}`);
-    const digest = sha.digest("hex");
-    if (digest !== razorpay_signature){
-        return res.status(400).json({msg: "Transaction is not LEgit!!"});
+    try {
+        
+        sha.update(`${razorpay_order_id}|${razorpay_payment_id}`);
+        const digest = sha.digest("hex");
+        if (digest !== razorpay_signature){
+            return res.status(400).json({msg: "Transaction is not LEgit!!"});
+        }
+        res.json({msg:"Trasaction is Legit",orderId: razorpay_order_id,paymentId:razorpay_payment_id});
+    } catch (error) {
+     console.log(error)   
     }
-    res.json({msg:"Trasaction is Legit",orderId: razorpay_order_id,paymentId:razorpay_payment_id});
 })
 
 app.listen(process.env.PORT, () => {

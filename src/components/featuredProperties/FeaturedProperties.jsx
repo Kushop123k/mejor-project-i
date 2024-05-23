@@ -25,7 +25,7 @@ const FeaturedProperties = () => {
             />
             <span className="fpName">{hotel.name}</span>
             <span className="fpCity">{hotel.city}</span>
-            <span className="fpPrice">Starting from ${hotel.price}</span>
+            <span className="fpPrice">Starting from {hotel.price}</span>
             <div className="fpRating">
               <button>{(7+Math.random()*3).toFixed(1)}</button>
               <span>Excellent</span>

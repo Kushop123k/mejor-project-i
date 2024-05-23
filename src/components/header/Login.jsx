@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import './Login.css';
 import backgroundImage from './hotel-bg.jpg'; // Ensure the path is correct
-import { login } from '../service/Api';
+import { getUser, login } from '../service/Api';
 import { useNavigate } from 'react-router-dom';
 
-function Login() {
+function Login({setUser}) {
     const [credentials, setCredentials] = useState({ email: '', password: '', userType: 'normal' });
     const [error, setError] = useState('');
     const navigate = useNavigate();
@@ -20,7 +20,10 @@ function Login() {
 
         try {
             const response = await login(credentials.email, credentials.password, credentials.userType);
-            if (response === "Success") {
+            if (response !== - 1) {
+                localStorage.setItem("userId",response)
+                const {data:user}=await getUser(response)
+                localStorage.setItem('userName',user.name)
                 if (credentials.userType === 'admin') {
                     navigate('/AdminHome');
                 } else {

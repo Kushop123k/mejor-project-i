@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./searchItem.css";
-import { Navigate } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 export const images = [
   'https://img.freepik.com/free-photo/luxury-classic-modern-bedroom-suite-hotel_105762-1787.jpg?size=626&ext=jpg&ga=GA1.1.1224184972.1715558400&semt=sph',
   "https://images.pexels.com/photos/164595/pexels-photo-164595.jpeg",
@@ -64,7 +64,7 @@ const SearchItem = (props) => {
         <div className="siDetailTexts">
           <span className="siPrice">{props.price}</span>
           <span className="siTaxOp">Includes taxes and fees</span>
-          <button onClick={handleAvailabilityClick} className="siCheckButton">See availability</button>
+          <Link to={`/hotel/${props.id}`}  className="siCheckButton">See availability</Link>
         </div>
       </div>
     </div>

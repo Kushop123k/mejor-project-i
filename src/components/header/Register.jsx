@@ -34,11 +34,17 @@ const Register = () => {
     const addUserDetails = async () => {
         if (phoneValid) {
             try {
-                await addUser(user);
-                toast.success("User created successfully!");
-                setTimeout(() => {
-                    navigate('/login'); // Navigate to home page after successful registration
-                }, 2000); // Delay for 2 seconds before navigating
+                const {data}=await addUser(user);
+                console.log(data)
+                if(data.id!==0){
+                    toast.success("User created successfully!");
+                    setTimeout(() => {
+                        navigate('/login'); // Navigate to home page after successful registration
+                    }, 2000); // Delay for 2 seconds before navigating
+                }
+                else{
+                    toast.error("User already exists")
+                }
             } catch (error) {
                 setError("Failed to create user. Please try again.");
             }

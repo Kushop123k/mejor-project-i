@@ -16,7 +16,10 @@ import Welcome from "./components/Welcome";
 import AddToCart from "./components/AddToCart";
 import AdminHome from "../src/pages/home/AdminHome"
 import Payment from "../src/pages/Payment"
+import ViewBooking from "./components/service/ViewBooking";
+import { useState } from "react";
 function App() {
+  const [userId,setUserId]=useState(-1)
   return (
     <BrowserRouter>
     
@@ -25,9 +28,9 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/hotels" element={<List />} />
         <Route path="/hotels/:id" element={<Hotel />} />
-<Route path="/hotel" element={<Hotel/>}/>
+        <Route path="/hotel/:id" element={<Hotel user={userId}/>}/>
         <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/login" element={<Login setUser={setUserId}/>} />
         <Route path="AdminHome" element={<AdminHome/>}/>
         <Route path="/AddToCart" element={<AddToCart />} />
         <Route path="/add-hotel" element={<AddHotel />} />
@@ -37,6 +40,7 @@ function App() {
         <Route path="/ManageUsers" element={<ManageUsers/>}/>
         <Route path="/payment" element={<Payment/>}/>
         <Route path="/edit/:id" element={<EditUser/>}/>
+        <Route path="/ViewBooking" element={<ViewBooking/>}/>
       </Routes>
     </BrowserRouter>
   );

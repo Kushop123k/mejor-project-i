@@ -106,6 +106,9 @@
   border: none;
   cursor: pointer;
   border-radius: 5px;
+  text-align: left;
+  color:white !important;
+  text-decoration: none !important;
 }/* searchItem.css */
 
 .searchItem {

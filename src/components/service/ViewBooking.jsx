@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Table, TableHead, TableBody, TableRow, TableCell, Button } from "@mui/material";
-import { getHotels, cancelBooking, getBookings } from "../components/service/Api.js";
-import styles from '../components/ViewHotel.module.css'; // Import the CSS module
+import { getBookings, cancelBooking } from "../service/Api";
+import styles from '../ViewHotel.module.css'; // Import the CSS module
 
-const ViewHotel = () => {
-    const [bookings, setBookings] = useState([])
+const ViewBooking = () => {
+    const [bookings, setBookings] = useState([]);; // Assuming the token is stored in localStorage
 
-  
     useEffect(() => {
         getBookingDetails();
     }, []);
@@ -15,12 +14,18 @@ const ViewHotel = () => {
         let response = await getBookings();
         const username=localStorage.getItem("userName")
         console.log(response);
-        setBookings(response.data);
+        setBookings(response.data.filter((item)=>item.userName===username));
     };
 
     const cancelBookingData = async (body) => {
         console.log(body)
-        await cancelBooking(body);
+        await cancelBooking({
+            hotelId : 63,
+            hotelName : "hi kamon a60",
+            id: 3,
+            rooms: 1,
+            userName :"kushalnormal"
+        });
         getBookingDetails();
     };
 
@@ -55,4 +60,5 @@ const ViewHotel = () => {
         </div>
     );
 };
-export default ViewHotel;
+
+export default ViewBooking;

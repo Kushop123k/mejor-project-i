@@ -79,3 +79,31 @@ export const getAllHotels = async () => {
         console.log('Error while calling getHotels API', error.message);
     }
 };
+
+export const getBookings = async (token) => {
+    return await axios.get(`${userUrl}/fetchbooking`, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+};
+
+export const cancelBooking = async (body) => {
+    try {
+        
+        return await axios.delete(`${userUrl}/deletebooking`,body);
+    } catch (error) {
+     console.log(error)   
+    }
+};
+export const getHotelById = async (id) => {
+    return await axios.get(`${userUrl}/hotel/${id}`);
+};
+export const addbooking = async (body) => {
+    try {
+        
+        return await axios.post(`${userUrl}/addbooking`,body);
+    } catch (error) {
+        console.log(error)   
+    }
+    };
