@@ -92,14 +92,9 @@ function App() {
         <div className="image-container">
           <img src="https://unsplash.com/photos/HNPrWOH2Z8U/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8M3x8cGF5bWVudHxlbnwwfHx8fDE3MTQyNzAyMzN8MA&force=true&w=640" alt="Hotel Image" />
         </div>
-        <div className="payment-options">
-          <h2>Please choose your payment method</h2>
-          <button className="payment-option" onClick={() => alert('Your Booking is confirmed')}>Pay at Hotel</button>
-          
-          <h2>or</h2>
           <button className="payment-option" onClick={PaymentHandler}>Pay Now</button>
         </div>
-      </div>
+      
       
     </>
   )

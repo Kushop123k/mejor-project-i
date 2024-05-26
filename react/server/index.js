@@ -20,7 +20,7 @@ app.post("/order", async (req, res) =>{
     try {
         const razorpay = new Razorpay({
             key_id: process.env.KEY_ID,
-key_secret: process.env.KEY_SECRET    
+    key_secret: process.env.KEY_SECRET    
         });
         
         if(!req.body){
@@ -44,7 +44,8 @@ key_secret: process.env.KEY_SECRET
 app.post("/validate", async (req, res)=>{
     const {razorpay_order_id,razorpay_payment_id, razorpay_signature }= req.body 
 
-    const sha = crypto.createHmac("sha256", process.env.RAZORPAY_SECRET);
+    console.log(req.body)
+    const sha = crypto.createHmac("sha256", process.env.KEY_SECRET);
 
     try {
         

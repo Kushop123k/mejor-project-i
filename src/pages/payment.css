@@ -1,0 +1,103 @@
+/* payment.css */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent background for readability */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(29, 27, 27, 0.827);
+    max-width: 600px;
+    margin: 20px auto;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.image-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.animated-image {
+    max-width: 100%;
+    border-radius: 10px;
+    animation: imageFadeIn 1s forwards;
+}
+
+@keyframes imageFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.payment-options {
+    text-align: center;
+}
+
+.animated-text {
+    margin: 10px 0;
+    font-size: 1.5em;
+    color: #333;
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: textFadeIn 1s forwards;
+}
+
+@keyframes textFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.payment-option {
+    background-color: #3399cc;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    margin: 10px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.animated-button {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: buttonFadeIn 1s forwards;
+    animation-delay: 0.3s;
+}
+
+@keyframes buttonFadeIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.payment-option:hover {
+    background-color: #287ba9;
+    transform: scale(1.05);
+}
+
+.payment-option:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}

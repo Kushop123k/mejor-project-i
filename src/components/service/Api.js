@@ -93,9 +93,9 @@ export const getBookings = async (token) => {
     }
 };
 
-export const cancelBooking = async (bookingId) => {
+export const cancelBooking  = async (body) => {
     try {
-        return await axios.delete(`${userUrl}/deletebooking/${bookingId}`);
+        return await axios.post(`${userUrl}/deletebooking`,body);
     } catch (error) {
         console.log('Error while calling cancelBooking API', error.message);
     }

@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import useRazorpay from "react-razorpay";
 import './payment.css'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {  addbooking, getUser } from '../components/service/Api';
 export default function Payment() {
   const location = useLocation();
   const [Razorpay] = useRazorpay();
+  const navigate=useNavigate()
   useEffect(() => {
     console.log(location.state)
   })
@@ -42,40 +43,46 @@ export default function Payment() {
       const { data: user } = await getUser(localStorage.getItem('userId'))
       console.log({user})
       var option = {
-
-        key: order.id,
+        key:"",
         amount,
         currency,
-        name: location.state.hotelName,
+        name:"Hotel Bookings",
         description: "Test Transaction",
-        image: "https://unsplash.com/photos/lvWw_G8tKsk/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8OHx8cGF5bWVudHxlbnwwfHx8fDE3MTQyNzAyMzN8MA&force=true&w=640",
-        order_id: order.id,
-        handler: async function (response) {
-          const body = { ...response, }
-          const validateResponse = await fetch("http://localhost:4080/validate", {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(body)
-          })
-
-          const jsonResponse = await validateResponse.json();
-          console.log('jsonResponse', jsonResponse);
-
+        image:"https://unsplash.com/photos/lvWw_G8tKsk/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8OHx8cGF5bWVudHxlbnwwfHx8fDE3MTQyNzAyMzN8MA&force=true&w=640",
+        order_id:order.id,
+        handler: async function(response){
+            const body = {...response,}
+            const validateResponse = await fetch("http://localhost:4080/validate",{
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify(body)
+            })
+  
+              const jsonResponse = await validateResponse.json();
+              console.log('jsonResponse',jsonResponse);
+              await addBooking({
+                hotelId: location.state.hotelId,
+                userName: user.name,
+                hotelName: location.state.hotelName,
+                rooms: location.state.rooms
+              })
+              navigate('/Viewbooking')
         },
-        prefill: {
-          name: user?.name,
-          email: user?.email,
-          contact: user.phno
+        prefill:{
+          name:user.name,
+          email:user.email,
+          contact:user.phno
         },
-        notes: {
-          address: "Razorpay Corporate office",
+        notes:{
+          address:"Razorpay Corporate office",
         },
-        theme: {
-          color: "#3399cc",
+        theme:{
+          color:"#3399cc",
         },
       }
+  
 
       var rzpl = new Razorpay(option);
       rzpl.on("payment failed", function (response) {
@@ -88,27 +95,12 @@ export default function Payment() {
         alert(response.error.metadata.payment_id);
 
       })
-      rzpl.on('order.paid', async () => {
-        console.log("done")
-        try {
-          await addBooking({
-            hotelId: location.state.hotelId,
-            userName: user.name,
-            hotelName: location.state.hotelName,
-            rooms: location.state.rooms
-          })
-        } catch (error) {
-          console.log(error)
-        }
+      rzpl.on("order.paid",()=>{
+        console.log("payment done")
       })
       rzpl.open();
+  
       event.preventDefault();
-      addBooking({
-        hotelId: location.state.hotelId,
-        userName: user.name,
-        hotelName: location.state.hotelName,
-        rooms: location.state.rooms
-      })
     } catch (error) {
       console.log(error)
     }
@@ -128,14 +120,10 @@ export default function Payment() {
         <div className="image-container">
           <img src="https://unsplash.com/photos/HNPrWOH2Z8U/download?ixid=M3wxMjA3fDB8MXxzZWFyY2h8M3x8cGF5bWVudHxlbnwwfHx8fDE3MTQyNzAyMzN8MA&force=true&w=640" alt="Hotel Image" />
         </div>
-        <div className="payment-options">
-          <h2>Please choose your payment method</h2>
-          <button className="payment-option" onClick={() => alert('Your Booking is confirmed')}>Pay at Hotel</button>
-
-          <h2>or</h2>
           <button className="payment-option" onClick={PaymentHandler}>Pay Now</button>
         </div>
-      </div>
+      
     </>
   )
 }
+
