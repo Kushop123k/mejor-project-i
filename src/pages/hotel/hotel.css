@@ -151,3 +151,8 @@
   color: lightgray;
   cursor: pointer;
 }
+
+.warning {
+  color: red;
+  margin-top: 10px;
+}

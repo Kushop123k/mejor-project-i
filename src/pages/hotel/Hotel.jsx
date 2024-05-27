@@ -11,22 +11,26 @@ import {
   faLocationDot,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useState } from "react";
-import { Link, Navigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getHotelById } from "../../components/service/Api";
 
-const Hotel = ({user}) => {
+const Hotel = ({ user }) => {
   const [slideNumber, setSlideNumber] = useState(0);
-  const [rooms,setRooms]=useState(1)
+  const [rooms, setRooms] = useState(1);
   const [open, setOpen] = useState(false);
-  const params=useParams()
-  const [hotel,setHotel]=useState({})
-  async function fetchHotel(){
-    const {data}=await getHotelById(params.id)
-    setHotel(data)
+  const [warning, setWarning] = useState('');
+  const params = useParams();
+  const [hotel, setHotel] = useState({});
+
+  async function fetchHotel() {
+    const { data } = await getHotelById(params.id);
+    setHotel(data);
   }
-  useEffect(()=>{
-    fetchHotel()
-  },[])
+
+  useEffect(() => {
+    fetchHotel();
+  }, []);
+
   const photos = [
     {
       src: "https://cf.bstatic.com/xdata/images/hotel/max1280x900/261707778.jpg?k=56ba0babbcbbfeb3d3e911728831dcbc390ed2cb16c51d88159f82bf751d04c6&o=&hp=1",
@@ -57,13 +61,26 @@ const Hotel = ({user}) => {
     let newSlideNumber;
 
     if (direction === "l") {
-      newSlideNumber = slideNumber === 0 ? 5 : slideNumber - 1;
+      newSlideNumber = slideNumber === 0 ? photos.length - 1 : slideNumber - 1;
     } else {
-      newSlideNumber = slideNumber === 5 ? 0 : slideNumber + 1;
+      newSlideNumber = slideNumber === photos.length - 1 ? 0 : slideNumber + 1;
     }
 
-    setSlideNumber(newSlideNumber)
+    setSlideNumber(newSlideNumber);
   };
+
+  const handleRoomChange = (e) => {
+    const value = Number(e.target.value);
+    if (value > hotel.room) {
+      setWarning(`Only ${hotel.room} room${hotel.room > 1 ? 's' : ''} available`);
+    } else if (value < 1) {
+      setWarning(`You must book at least 1 room`);
+    } else {
+      setWarning('');
+    }
+    setRooms(value > hotel.room ? hotel.room : value < 1 ? 1 : value);
+  };
+
   return (
     <div>
       <Navbar />
@@ -137,16 +154,19 @@ const Hotel = ({user}) => {
               <h1>Perfect for a stay!</h1>
               <span>
                 Located in the real heart of {hotel?.location}, this property has an
-                excellent location score of {(7+Math.random()*3).toFixed(1)}!
+                excellent location score of {(7 + Math.random() * 3).toFixed(1)}!
               </span>
               <h2>
                 <b>₹{hotel?.price}</b> (Per night)
               </h2>
-              <h4>{hotel?.room} are available</h4>
-                <label htmlFor="rooms">
-                <input type="number" id="rooms" max={hotel.room} value={rooms} onChange={(e)=> {if(e.target.value>hotel?.room) return; setRooms(e.target.value)}} />
-                </label>
-              <Link to="/payment" state={{prize:hotel?.price*100,hotelId:hotel?.id,userId:user,rooms,hotelName:hotel.hotelName}}> Book Now at this prize!</Link>
+              <h4>{hotel?.room} room{hotel?.room > 1 ? 's' : ''} available</h4>
+              <label htmlFor="rooms">
+                <input type="number" id="rooms" value={rooms} onChange={handleRoomChange} />
+              </label>
+              {warning && <p className="warning">{warning}</p>}
+              <Link to="/payment" state={{ prize: hotel?.price * 100, hotelId: hotel?.id, userId: user, rooms, hotelName: hotel.hotelName }}>
+                Book Now at this price!
+              </Link>
             </div>
           </div>
         </div>

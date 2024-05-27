@@ -13,7 +13,7 @@ const Navbar = () => {
   return (
     <div className="navbar">
       <div className="navContainer">
-        <span className="logo">Kushhotel</span>
+        <span className="logo">Stay Away</span>
         <div className="navItems">
           <button className="navButton" onClick={() => navigate("/ViewBooking")}>
             View Booking

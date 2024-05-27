@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../header/Add.css'; // Reusing the existing CSS
 import backgroundImage from '../header/hotel-bg.jpg'; // Reusing the same background image
 import { addHotel } from "../service/Api"; // Ensure you have this function in your API service
@@ -15,6 +16,7 @@ const initialValues = {
 const AddHotel = () => {
     const [hotel, setHotel] = useState(initialValues);
     const [amenitiesOptions] = useState(["WiFi", "Pool", "Parking", "Spa", "Gym"]);
+    const navigate = useNavigate();
 
     const onValueChange = (e) => {
         const { name, value } = e.target;
@@ -50,6 +52,7 @@ const AddHotel = () => {
 
             await addHotel(body); // You need to handle this function on your API service side
             alert("Hotel added successfully!");
+            navigate('/home'); // Navigate to the home page
         } catch (error) {
             console.error("Failed to add hotel:", error);
             alert("Failed to add hotel. Please try again.");
