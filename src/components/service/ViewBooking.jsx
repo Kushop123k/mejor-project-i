@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import { Table, TableHead, TableBody, TableRow, TableCell, Button, CircularProgress, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import { getBookings, cancelBooking } from "../service/Api";
+import { useNavigate } from "react-router-dom"; // Import useNavigate
 import styles from '../ViewHotel.module.css'; // Import the CSS module
 
 const ViewBooking = () => {
@@ -8,8 +9,9 @@ const ViewBooking = () => {
     const [loading, setLoading] = useState(true);
     const [openDialog, setOpenDialog] = useState(false);
     const [selectedBookingId, setSelectedBookingId] = useState(null);
+    const navigate = useNavigate(); // Initialize useNavigate
 
-    const getBookingDetails =(async () => {
+    const getBookingDetails = async () => {
         setLoading(true);
         try {
             let response = await getBookings();
@@ -20,7 +22,7 @@ const ViewBooking = () => {
         } finally {
             setLoading(false);
         }
-    })
+    };
 
     useEffect(() => {
         getBookingDetails();
@@ -33,13 +35,15 @@ const ViewBooking = () => {
 
     const confirmCancelBooking = async () => {
         try {
-            const booking=bookings.find(item=>item.id===selectedBookingId)
+            const booking = bookings.find((item) => item.id === selectedBookingId);
             await cancelBooking(booking);
             getBookingDetails(); // Refresh the booking list
+            setOpenDialog(false);
+            navigate('/home'); // Redirect to the home page after cancelling
         } catch (error) {
             console.error("Error cancelling booking:", error);
         } finally {
-            setOpenDialog(false);
+            setSelectedBookingId(null);
         }
     };
 
@@ -53,39 +57,45 @@ const ViewBooking = () => {
             {loading ? (
                 <CircularProgress />
             ) : (
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell className={styles.headerCell}>Serial no.</TableCell>
-                            <TableCell className={styles.headerCell}>Hotel ID</TableCell>
-                            <TableCell className={styles.headerCell}>Hotel Name</TableCell>
-                            <TableCell className={styles.headerCell}>User</TableCell>
-                            <TableCell className={styles.headerCell}>Rooms</TableCell>
-                            <TableCell className={styles.headerCell}></TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {bookings.map((booking, index) => (
-                            <TableRow key={booking.id}>
-                                <TableCell className={styles.rowCell}>{index + 1}</TableCell>
-                                <TableCell className={styles.rowCell}>{booking.hotelId}</TableCell>
-                                <TableCell className={styles.rowCell}>{booking.hotelName}</TableCell>
-                                <TableCell className={styles.rowCell}>{booking.userName}</TableCell>
-                                <TableCell className={styles.rowCell}>{booking.rooms}</TableCell>
-                                <TableCell className={styles.buttonGroup}>
-                                    <Button
-                                        className={styles.cancelButton}
-                                        onClick={() => handleCancel(booking.id)}
-                                        variant="contained"
-                                        color="secondary"
-                                    >
-                                        Cancel
-                                    </Button>
-                                </TableCell>
-                            </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
+                <>
+                    {bookings.length === 0 ? (
+                        <p>No bookings done yet.</p>
+                    ) : (
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableCell className={styles.headerCell}>Serial no.</TableCell>
+                                    <TableCell className={styles.headerCell}>Hotel ID</TableCell>
+                                    <TableCell className={styles.headerCell}>Hotel Name</TableCell>
+                                    <TableCell className={styles.headerCell}>User</TableCell>
+                                    <TableCell className={styles.headerCell}>Rooms</TableCell>
+                                    <TableCell className={styles.headerCell}></TableCell>
+                                </TableRow>
+                            </TableHead>
+                            <TableBody>
+                                {bookings.map((booking, index) => (
+                                    <TableRow key={booking.id}>
+                                        <TableCell className={styles.rowCell}>{index + 1}</TableCell>
+                                        <TableCell className={styles.rowCell}>{booking.hotelId}</TableCell>
+                                        <TableCell className={styles.rowCell}>{booking.hotelName}</TableCell>
+                                        <TableCell className={styles.rowCell}>{booking.userName}</TableCell>
+                                        <TableCell className={styles.rowCell}>{booking.rooms}</TableCell>
+                                        <TableCell className={styles.buttonGroup}>
+                                            <Button
+                                                className={styles.cancelButton}
+                                                onClick={() => handleCancel(booking.id)}
+                                                variant="contained"
+                                                color="secondary"
+                                            >
+                                                Cancel
+                                            </Button>
+                                        </TableCell>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    )}
+                </>
             )}
             <Dialog
                 open={openDialog}

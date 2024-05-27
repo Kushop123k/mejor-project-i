@@ -164,9 +164,9 @@ const Hotel = ({ user }) => {
                 <input type="number" id="rooms" value={rooms} onChange={handleRoomChange} />
               </label>
               {warning && <p className="warning">{warning}</p>}
-              <Link to="/payment" state={{ prize: hotel?.price * 100, hotelId: hotel?.id, userId: user, rooms, hotelName: hotel.hotelName }}>
-                Book Now at this price!
-              </Link>
+              <Link to="/payment" state={{ prize: hotel?.price * rooms * 100, hotelId: hotel?.id, userId: user, rooms, hotelName: hotel.hotelName }}>
+  Book Now at this price!
+</Link>
             </div>
           </div>
         </div>

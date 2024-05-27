@@ -21,10 +21,12 @@ const Navbar = () => {
           <button className="navButton" onClick={() => navigate(`/edit/${localStorage.getItem("userId")}`)}>
             Edit Account
           </button>
+          
          
           <button className="navButton" onClick={handleLogout}>
             Logout
           </button>
+          
         </div>
       </div>
     </div>
